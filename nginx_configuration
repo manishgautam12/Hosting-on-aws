@@ -1,9 +1,10 @@
+############### for only backend #######################################
  server {
         listen 80 default_server;
         listen [::]:80 default_server;
 
         location /v1/api/ {
-        proxy_pass http://3.109.201.64:9005;
+                proxy_pass http://3.109.201.64:9005;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection 'upgrade';
@@ -15,3 +16,65 @@
     
     }
 }
+
+#############################################################################################
+
+
+
+
+
+
+////////////// full configurationfor frontend and backend ////////////
+
+#  run this command  
+        cd /etc/nginx/sites-available/
+         ls
+           default
+                 # delete default file and create new file
+
+
+
+###################################################################################################
+
+ server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+
+         location / {
+        root /var/www/html;
+        index  index.html index.htm;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+        try_files $uri $uri/ /index.html;
+  }
+
+        location /v1/api/ {
+                proxy_pass http://13.235.171.165:9005;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+                # First attempt to serve request as file, then
+                # as directory, then fall back to displaying a 404.
+                try_files $uri $uri/ =404;
+
+    }
+}
+
+###########################################################################################
+
+
+########################## for frontend ##############################
+
+   in main folder. where all file present..........
+
+        1->   npm run build
+	2->   sudo cp -R ./build/* /var/www/html/
+	3->   sudo systemctl restart nginx
+
+	check your public Ip
+  
