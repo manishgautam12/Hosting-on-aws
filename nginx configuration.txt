@@ -4,7 +4,7 @@
         listen [::]:80 default_server;
 
         location /v1/api/ {
-                proxy_pass http://1.108.205.63:9005;
+                proxy_pass http://3.107.206.60:8005;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection 'upgrade';
@@ -52,7 +52,7 @@
   }
 
         location /v1/api/ {
-                proxy_pass http://13.235.171.165:9005;
+                proxy_pass http://13.234.170.165:8005;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection 'upgrade';
@@ -77,4 +77,48 @@
 	3->   sudo systemctl restart nginx
 
 	check your public Ip
+
+
+
+#############################################################################################
+
+   <-----------       for shift backend request http to https ---------->
+
+
+ server {
+        server_name www.example.com example.com;
+
+         location / {
+        root /var/www/html;
+        index  index.html index.htm;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+        try_files $uri $uri/ /index.html;
+  }
+
+        location /v1 {
+                proxy_pass http://13.234.170.165:8005;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+
+    }
+
+}
+server {
+    if ($host = www.example.com) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+
+    listen 80;
+    server_name www.example.com example.com;
+
+ }                                                                      
   
