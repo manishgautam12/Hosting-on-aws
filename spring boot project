@@ -1,0 +1,12 @@
+1-> connect instance to vs code using .pem file
+2-> Create new folder use this command 
+       mkdir foldername
+3->    sudo apt-get update
+4->    sudo apt install default-jdk
+         ////////////////// for specific jdk version  --> sudo apt install openjdk-17-jdk
+5->    java -version
+6->   mvn clean package
+7-> goto in your target folder and run jar file
+    cd target
+      8->  java -jar "jar file name".jar
+ 
