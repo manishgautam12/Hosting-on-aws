@@ -6,7 +6,7 @@
          ////////////////// for specific jdk version  --> sudo apt install openjdk-17-jdk
 5->    java -version
 6-> clone your code from github or bitbucket
-7->   mvn clean package
+7->   sudo mvn package
 8-> goto in your target folder and run jar file
     cd target
       8->  java -jar "jar file name".jar
