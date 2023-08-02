@@ -1,0 +1,31 @@
+ /////// install mysql on server ////////
+  ->   sudo apt update
+   ->  sudo apt install mysql-server
+   -> sudo service mysql start
+  ->  sudo service mysql status
+
+
+//////// create mysql user //////////////
+
+1->    sudo mysql
+2->    CREATE USER 'new_username'@'localhost' IDENTIFIED BY 'user_password';
+       -> CREATE USER 'new_username'@'%' IDENTIFIED BY 'user_password';    
+3->     GRANT ALL PRIVILEGES ON database_name.* TO 'new_username'@'localhost';
+       -> GRANT ALL PRIVILEGES ON *.* TO 'new_username'@'%' with grant option;
+4->    FLUSH PRIVILEGES;
+5->    EXIT;
+
+////////////// list all user ///////////
+ ->     SELECT User, Host FROM mysql.user;
+
+ ////////// login with user ///////////////
+   mysql -u "username" -p
+
+
+
+CREATE USER 'manish'@'%' IDENTIFIED BY 'Sarla@#1234';
+GRANT ALL PRIVILEGES ON *.* TO 'manish'@'%' with grant option;
+   
+
+
+
