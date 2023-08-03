@@ -23,7 +23,7 @@
 
 
 
-CREATE USER 'manish'@'%' IDENTIFIED BY 'Sarla@#1234';
+CREATE USER 'manish'@'%' IDENTIFIED BY 'password';
 GRANT ALL PRIVILEGES ON *.* TO 'manish'@'%' with grant option;
    
 
